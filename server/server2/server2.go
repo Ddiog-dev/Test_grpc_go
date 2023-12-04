@@ -13,9 +13,9 @@ import (
 )
 
 var (
-	port = flag.Int("port", 50051, "The server port")
-	addr = flag.String("addr", "localhost:50052", "the address to connect to")
-	name = flag.String("name", "Ping", "Name to greet")
+	port = flag.Int("port", 50052, "The server port")
+	addr = flag.String("addr", "localhost:50051", "the address to connect to")
+	name = flag.String("name", "Pong", "Name to greet")
 )
 
 type server struct {
@@ -24,11 +24,11 @@ type server struct {
 
 func (s *server) SayHello(ctx context.Context, in *chat.Message) (*chat.Message, error) {
 	log.Printf("Received: %v", in.GetBody())
-	go sendPing()
-	return &chat.Message{Body: "Server 1 response "}, nil
+	go sendPong()
+	return &chat.Message{Body: "Server 2 response "}, nil
 }
 
-func sendPing() {
+func sendPong() {
 	time.Sleep(1 * time.Second)
 	flag.Parse()
 	// Set up a connection to the server.
